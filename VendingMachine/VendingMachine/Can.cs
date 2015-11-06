@@ -14,6 +14,7 @@ namespace VendingMachine
 
         private int _price;
         private int _numCans;
+        private int _initCans;
         private string _canName;
         private CanDispenser _canDispenser;
         private VMControl _total;
@@ -22,14 +23,15 @@ namespace VendingMachine
         {
             _price = price;
             _numCans = numCans;
+            _initCans = numCans;
             _canName = name;
             _canDispenser = canDispenser;
             _total = total;
         }
 
-        public void resetCans(int initCans)
+        public void resetCans()
         {
-            _numCans = initCans;
+            _numCans = _initCans;
         }
 
         public int price
@@ -38,11 +40,6 @@ namespace VendingMachine
             {
                 return _price;
             }
-        }
-
-        public void removeCan()
-        {
-            _numCans--;
         }
 
         public int CanStock
@@ -55,6 +52,7 @@ namespace VendingMachine
 
         public void DispenseCan()
         {
+            _numCans--;
             _canDispenser.Actuate();
         }
     }

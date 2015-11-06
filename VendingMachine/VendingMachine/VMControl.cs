@@ -21,8 +21,14 @@ namespace VendingMachine
         private int[] _initCoins;
         private Light[] _soldOutLights;
 
-        public VMControl(AmountDisplay AD, Light[] PL,
-            TimerLight NCL,  Light[] SOL)
+        /// <summary>
+        /// Controller Class constructor
+        /// </summary>
+        /// <param name="AD"></param>
+        /// <param name="PL"></param>
+        /// <param name="NCL"></param>
+        /// <param name="SOL"></param>
+        public VMControl(AmountDisplay AD, Light[] PL, TimerLight NCL,  Light[] SOL)
         {
             _ad = AD;
             _purchaseLights = PL;
@@ -50,7 +56,7 @@ namespace VendingMachine
         /// Method to update coin inventory after inserting a coin
         /// </summary>
         /// <param name="coin"></param>
-        public void addCoin(Coin coin)
+        public void UpdateCredit(Coin coin)
         {
             //coin.addCoin();
             credit += coin.coinValue;
@@ -113,11 +119,11 @@ namespace VendingMachine
             if(isPurchseable(can))
             {
                 credit -= can.price;
-                can.removeCan();
+                can.DispenseCan();
                 returnCoins();
                 UpdateDisplay();
-                int i = Array.IndexOf(_Cans, can);
-                can.DispenseCan();
+                //int i = Array.IndexOf(_Cans, can);
+                
             }
         }
 
@@ -182,12 +188,12 @@ namespace VendingMachine
         {
             for(int i = 0; i < _Coins.Length; i++)
             {
-                _Coins[i].resetCoin(_initCoins[i]);
+                _Coins[i].resetCoin();
             }
 
             for (int i = 0; i < _Cans.Length; i++)
             {
-                _Cans[i].resetCans(_initCans[i]);
+                _Cans[i].resetCans();
             }
             credit = 0;
             UpdateDisplay();

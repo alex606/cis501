@@ -13,6 +13,7 @@ namespace VendingMachine
     {
 
         private int _numCoin;
+        private int _initCoins;
         private int _coinValue;
         private CoinDispenser _coinDispenser;
         private VMControl _total;
@@ -28,7 +29,7 @@ namespace VendingMachine
         public void addCoin()
         {
             _numCoin++;
-            _total.addCoin(this);
+            _total.UpdateCredit(this);
         }
 
         public void removeCoin()
@@ -36,9 +37,9 @@ namespace VendingMachine
             _numCoin--;
         }
 
-        public void resetCoin(int initNum)
+        public void resetCoin()
         {
-            _numCoin = initNum;
+            _numCoin = _initCoins;
         }
 
         public int numCoin
