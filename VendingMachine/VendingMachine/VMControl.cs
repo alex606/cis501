@@ -16,23 +16,18 @@ namespace VendingMachine
         private Can[] _Cans;
         private AmountDisplay _ad;
         private Light[] _purchaseLights;
-        private CanDispenser[] _canDispensors;
-        private CoinDispenser[] _coinDispensors;
         private TimerLight _noChangelight;
         private int[] _initCans;
         private int[] _initCoins;
         private Light[] _soldOutLights;
 
         public VMControl(Coin[] Coins, Can[] Cans, AmountDisplay AD, Light[] PL,
-            CanDispenser[] CD, CoinDispenser[] CoD, TimerLight NCL, int[] InitCans, int[] InitCoins,
-            Light[] SOL)
+            TimerLight NCL, int[] InitCans, int[] InitCoins, Light[] SOL)
         {
             _Coins = Coins;
             _Cans = Cans;
             _ad = AD;
             _purchaseLights = PL;
-            _canDispensors = CD;
-            _coinDispensors = CoD;
             _noChangelight = NCL;
             _initCans = InitCans;
             _initCoins = InitCoins;
@@ -57,16 +52,13 @@ namespace VendingMachine
         /// <returns></returns>
         public Boolean isPurchseable(Can can)
         {
-            if(credit >= can.price)
+            if(credit >= can.price && can.CanStock > 0)
             {
-                if(can.CanStock > 0)
-                {   
-                    if (CanReturnCoins(can.price))
-                    {
-                        return true;
-                    }
-                    _noChangelight.TurnOn3Sec();
+                if (CanReturnCoins(can.price))
+                {
+                    return true;
                 }
+                _noChangelight.TurnOn3Sec();
             }
             return false;
         }
@@ -113,7 +105,7 @@ namespace VendingMachine
                 returnCoins();
                 UpdateDisplay();
                 int i = Array.IndexOf(_Cans, can);
-                _canDispensors[i].Actuate();
+                can.DispenseCan();
             }
         }
 
@@ -139,7 +131,7 @@ namespace VendingMachine
                     _Coins[i].removeCoin();
                     count++;
                 }
-                _coinDispensors[i].Actuate(count);
+                _Coins[i].dispenseCoin(count);
             }
             UpdateDisplay();
         }

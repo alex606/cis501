@@ -15,11 +15,13 @@ namespace VendingMachine
         private int _numCoin;
         private int _totalValue;
         private int _coinValue;
+        private CoinDispenser _coinDispenser;
 
-        public Coin(int coinValue, int initNum)
+        public Coin(int coinValue, int initNum, CoinDispenser coinDispenser)
         {
             _coinValue = coinValue;
             _numCoin += initNum;
+            _coinDispenser = coinDispenser;
         }
 
         public void addCoin()
@@ -40,14 +42,6 @@ namespace VendingMachine
             _totalValue = 0;
         }
 
-        public int totalValue
-        {
-            get
-            {
-                return _totalValue;
-            }
-        }
-
         public int numCoin
         {
             get
@@ -63,5 +57,13 @@ namespace VendingMachine
                 return _coinValue;
             }
         }
+
+        public void dispenseCoin(int numcoin)
+        {
+            _coinDispenser.Actuate(numcoin);
+        }
+
+
+
     }
 }

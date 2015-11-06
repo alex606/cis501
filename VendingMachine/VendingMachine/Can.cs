@@ -15,12 +15,14 @@ namespace VendingMachine
         private int _price;
         private int _numCans;
         private string _canName;
+        private CanDispenser _canDispenser;
 
-        public Can(int price, int numCans, string name)
+        public Can(int price, int numCans, string name, CanDispenser canDispenser)
         {
             _price = price;
             _numCans = numCans;
             _canName = name;
+            _canDispenser = canDispenser;
         }
 
         public void resetCans(int initCans)
@@ -47,6 +49,11 @@ namespace VendingMachine
             {
                 return _numCans;
             }
+        }
+
+        public void DispenseCan()
+        {
+            _canDispenser.Actuate();
         }
     }
 }

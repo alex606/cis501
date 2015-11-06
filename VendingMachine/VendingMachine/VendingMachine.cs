@@ -107,15 +107,15 @@ namespace VendingMachine
             
             // Instantiate your entity and control objects
             // Connect these objects
-            tenYenCoin = new Coin(COINVALUES[0], NUMCOINS[0]);
-            fiftyYenCoin = new Coin(COINVALUES[1], NUMCOINS[1]);
-            hundredYenCoin = new Coin(COINVALUES[2], NUMCOINS[2]);
-            fiveHundredYenCoin = new Coin(COINVALUES[3], NUMCOINS[3]);
+            tenYenCoin = new Coin(COINVALUES[0], NUMCOINS[0], coinDispenser10Yen );
+            fiftyYenCoin = new Coin(COINVALUES[1], NUMCOINS[1], coinDispenser50Yen);
+            hundredYenCoin = new Coin(COINVALUES[2], NUMCOINS[2],coinDispenser100Yen);
+            fiveHundredYenCoin = new Coin(COINVALUES[3], NUMCOINS[3], coinDispenser500Yen);
 
-            coke = new Can(CANPRICES[0],NUMCANS[0], CANNAMES[0]);
-            pepsi= new Can(CANPRICES[1], NUMCANS[1], CANNAMES[1]);
-            pepper = new Can(CANPRICES[2], NUMCANS[2], CANNAMES[2]);
-            sprite = new Can(CANPRICES[3], NUMCANS[3], CANNAMES[3]);
+            coke = new Can(CANPRICES[0], NUMCANS[0], CANNAMES[0], canDispenser0);
+            pepsi = new Can(CANPRICES[1], NUMCANS[1], CANNAMES[1], canDispenser1);
+            pepper = new Can(CANPRICES[2], NUMCANS[2], CANNAMES[2], canDispenser2);
+            sprite = new Can(CANPRICES[3], NUMCANS[3], CANNAMES[3], canDispenser3);
 
             Can[] Cans = { coke, pepsi, pepper, sprite };
             Coin[] Coins = { tenYenCoin, fiftyYenCoin, hundredYenCoin, fiveHundredYenCoin };
@@ -123,8 +123,8 @@ namespace VendingMachine
             CanDispenser[] canDispensors = { canDispenser0, canDispenser1, canDispenser2, canDispenser3 };
             CoinDispenser[] coinDispensors = { coinDispenser10Yen, coinDispenser50Yen, coinDispenser100Yen, coinDispenser500Yen };
             Light[] soldOutLights = { soldOutLight0, soldOutLight1, soldOutLight2, soldOutLight3 };
-            Total = new VMControl(Coins, Cans, amountDisplay, purchaseLights, canDispensors, 
-                coinDispensors, noChangeLight, NUMCANS, NUMCOINS, soldOutLights);
+            Total = new VMControl(Coins, Cans, amountDisplay, purchaseLights,  
+                noChangeLight, NUMCANS, NUMCOINS, soldOutLights);
 
             // You must replace the following default constructors with 
             // constructors with arguments (non-default constructors)
