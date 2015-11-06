@@ -21,17 +21,29 @@ namespace VendingMachine
         private int[] _initCoins;
         private Light[] _soldOutLights;
 
-        public VMControl(Coin[] Coins, Can[] Cans, AmountDisplay AD, Light[] PL,
-            TimerLight NCL, int[] InitCans, int[] InitCoins, Light[] SOL)
+        public VMControl(AmountDisplay AD, Light[] PL,
+            TimerLight NCL,  Light[] SOL)
         {
-            _Coins = Coins;
-            _Cans = Cans;
             _ad = AD;
             _purchaseLights = PL;
             _noChangelight = NCL;
+            _soldOutLights = SOL;
+        }
+
+        /// <summary>
+        /// Method to Connect Cans and Coins objects with Controller
+        /// </summary>
+        /// <param name="Coins"></param>
+        /// <param name="Cans"></param>
+        /// <param name="InitCans"></param>
+        /// <param name="InitCoins"></param>
+        /// <param name="?"></param>
+        public void initMachine(Coin[] Coins, Can[] Cans, int[] InitCans, int[] InitCoins)
+        {
+            _Coins = Coins;
+            _Cans = Cans;
             _initCans = InitCans;
             _initCoins = InitCoins;
-            _soldOutLights = SOL;
         }
 
         /// <summary>
@@ -40,7 +52,7 @@ namespace VendingMachine
         /// <param name="coin"></param>
         public void addCoin(Coin coin)
         {
-            coin.addCoin();
+            //coin.addCoin();
             credit += coin.coinValue;
             UpdateDisplay();
         }

@@ -16,13 +16,15 @@ namespace VendingMachine
         private int _numCans;
         private string _canName;
         private CanDispenser _canDispenser;
+        private VMControl _total;
 
-        public Can(int price, int numCans, string name, CanDispenser canDispenser)
+        public Can(int price, int numCans, string name, CanDispenser canDispenser, VMControl total)
         {
             _price = price;
             _numCans = numCans;
             _canName = name;
             _canDispenser = canDispenser;
+            _total = total;
         }
 
         public void resetCans(int initCans)

@@ -16,7 +16,7 @@ namespace VendingMachine
     {
         // add a field to specify an object that CoinInserted() will firstvisit
         Coin _coin;
-        VMControl _total;
+        //VMControl _total;
 
         // rewrite the following constructor with a constructor that takes an object
         // to be set to the above field
@@ -26,12 +26,14 @@ namespace VendingMachine
         public CoinInserter(Coin coin, VMControl Total)
         {
             _coin = coin;
-            _total = Total;
+            //_total = Total;
         }
         public void CoinInserted()
         {
             // You can add only one line here
-            _total.addCoin(_coin);
+            //_total.addCoin(_coin);
+            _coin.addCoin();
+
         }
 
     }
