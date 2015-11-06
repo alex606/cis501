@@ -39,7 +39,7 @@ namespace VendingMachine
         private CoinDispenser coinDispenser10Yen, coinDispenser50Yen, coinDispenser100Yen, coinDispenser500Yen;
         private CanDispenser canDispenser0, canDispenser1, canDispenser2, canDispenser3;
         private CoinInserter coinInserter10Yen, coinInserter50Yen, coinInserter100Yen, coinInserter500Yen;
-        private VMButton purchaseButton0, purchaseButton1, purchaseButton2, purchaseButton3;
+        private PurchaseButton purchaseButton0, purchaseButton1, purchaseButton2, purchaseButton3;
         private VMButton coinReturnButton;
 
 
@@ -117,12 +117,20 @@ namespace VendingMachine
             hundredYenCoin = new Coin(COINVALUES[2], NUMCOINS[2],coinDispenser100Yen,Total);
             fiveHundredYenCoin = new Coin(COINVALUES[3], NUMCOINS[3], coinDispenser500Yen,Total);
 
-            coke = new Can(CANPRICES[0], NUMCANS[0], CANNAMES[0], canDispenser0,Total);
-            pepsi = new Can(CANPRICES[1], NUMCANS[1], CANNAMES[1], canDispenser1,Total);
-            pepper = new Can(CANPRICES[2], NUMCANS[2], CANNAMES[2], canDispenser2,Total);
-            sprite = new Can(CANPRICES[3], NUMCANS[3], CANNAMES[3], canDispenser3,Total);
+            // You must replace the following default constructors with 
+            // constructors with arguments (non-default constructors)
+            // to pass (set) the first object that ButtonPressed() will
+            // visit
 
+            coke = new Can(CANPRICES[0], NUMCANS[0], CANNAMES[0], canDispenser0, Total, purchasableLight0, soldOutLight0);
+            pepsi = new Can(CANPRICES[1], NUMCANS[1], CANNAMES[1], canDispenser1, Total, purchasableLight1, soldOutLight1);
+            pepper = new Can(CANPRICES[2], NUMCANS[2], CANNAMES[2], canDispenser2, Total, purchasableLight2, soldOutLight2);
+            sprite = new Can(CANPRICES[3], NUMCANS[3], CANNAMES[3], canDispenser3, Total, purchasableLight3, soldOutLight3);
 
+            purchaseButton0 = new PurchaseButton(coke);
+            purchaseButton1 = new PurchaseButton(pepsi);
+            purchaseButton2 = new PurchaseButton(pepper);
+            purchaseButton3 = new PurchaseButton(sprite);
 
             Can[] Cans = { coke, pepsi, pepper, sprite };
             Coin[] Coins = { tenYenCoin, fiftyYenCoin, hundredYenCoin, fiveHundredYenCoin };
@@ -133,22 +141,15 @@ namespace VendingMachine
 
             Total.initMachine(Coins, Cans, NUMCANS, NUMCOINS);
 
-            // You must replace the following default constructors with 
-            // constructors with arguments (non-default constructors)
-            // to pass (set) the first object that ButtonPressed() will
-            // visit
-            purchaseButton0 = new PurchaseButton(coke, Total);
-            purchaseButton1 = new PurchaseButton(pepsi, Total);
-            purchaseButton2 = new PurchaseButton(pepper, Total);
-            purchaseButton3 = new PurchaseButton(sprite,Total);
+
 
             // You must replace the following default constructors with
             // constructors that take armuments to pass the first object that
             // the CoinInserted() will call
-            coinInserter10Yen = new CoinInserter(tenYenCoin, Total);
-            coinInserter50Yen = new CoinInserter(fiftyYenCoin, Total);
-            coinInserter100Yen = new CoinInserter(hundredYenCoin, Total);
-            coinInserter500Yen = new CoinInserter(fiveHundredYenCoin, Total);
+            coinInserter10Yen = new CoinInserter(tenYenCoin);
+            coinInserter50Yen = new CoinInserter(fiftyYenCoin);
+            coinInserter100Yen = new CoinInserter(hundredYenCoin);
+            coinInserter500Yen = new CoinInserter(fiveHundredYenCoin);
 
             coinReturnButton = new CoinReturnButton(Total);
 

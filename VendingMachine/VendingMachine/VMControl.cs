@@ -123,7 +123,6 @@ namespace VendingMachine
                 returnCoins();
                 UpdateDisplay();
                 //int i = Array.IndexOf(_Cans, can);
-                
             }
         }
 
@@ -132,12 +131,6 @@ namespace VendingMachine
         /// </summary>
         public void returnCoins()
         {
-            if(!CanReturnCoins())
-            {
-                _noChangelight.TurnOn3Sec();
-                return;
-            }
-
             int start = _Coins.Length - 1;
             for (int i = start; i >= 0; i--)
             {
@@ -161,22 +154,7 @@ namespace VendingMachine
         {
             for (int i = 0; i < _Cans.Length; i++)
             {
-                if (_Cans[i].price <= credit && _Cans[i].CanStock > 0)
-                {
-                    _purchaseLights[i].TurnOn();
-                }
-                else
-                {
-                    _purchaseLights[i].TurnOff();
-                }
-                if(_Cans[i].CanStock == 0)
-                {
-                    _soldOutLights[i].TurnOn();
-                }
-                else
-                {
-                    _soldOutLights[i].TurnOff();
-                }
+                _Cans[i].IsCanPurchaseable(credit);
             }
             _ad.DisplayAmount(credit);
         }

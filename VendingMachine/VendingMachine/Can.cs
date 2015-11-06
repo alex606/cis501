@@ -18,8 +18,12 @@ namespace VendingMachine
         private string _canName;
         private CanDispenser _canDispenser;
         private VMControl _total;
+        private Light _purchaseLight;
+        private Light _SoldOutLight;
+        
 
-        public Can(int price, int numCans, string name, CanDispenser canDispenser, VMControl total)
+        public Can(int price, int numCans, string name, 
+            CanDispenser canDispenser, VMControl total, Light purchaseLight, Light SoldOutLight)
         {
             _price = price;
             _numCans = numCans;
@@ -27,11 +31,16 @@ namespace VendingMachine
             _canName = name;
             _canDispenser = canDispenser;
             _total = total;
+            _purchaseLight = purchaseLight;
+            _SoldOutLight = SoldOutLight;
+
         }
 
         public void resetCans()
         {
             _numCans = _initCans;
+            _SoldOutLight.TurnOff();
+            _purchaseLight.TurnOff();
         }
 
         public int price
@@ -50,10 +59,31 @@ namespace VendingMachine
             }
         }
 
+        public void PurchaseCan()
+        {
+            _total.purchaseCan(this);
+        }
+
+        public void IsCanPurchaseable(int credit)
+        {
+            if(credit >= _price && _numCans > 0)
+            {
+                _purchaseLight.TurnOn();
+            }
+            else
+            {
+                _purchaseLight.TurnOff();
+            }
+        }
+
         public void DispenseCan()
         {
             _numCans--;
             _canDispenser.Actuate();
+            if(_numCans == 0)
+            {
+                _SoldOutLight.TurnOn();
+            }
         }
     }
 }

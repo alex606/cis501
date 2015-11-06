@@ -23,7 +23,7 @@ namespace VendingMachine
         public CoinInserter()
         {
         }
-        public CoinInserter(Coin coin, VMControl Total)
+        public CoinInserter(Coin coin)
         {
             _coin = coin;
             //_total = Total;
@@ -47,21 +47,19 @@ namespace VendingMachine
     {
         // add a field to specify an object that ButtonPressed() will first visit
         Can _can;
-        VMControl _total;
+        //VMControl _total;
         
 
-        public PurchaseButton()
-        {
-        }
-        public PurchaseButton(Can can, VMControl total)
+        public PurchaseButton(Can can)
         {
             _can = can;
-            _total = total;
+            //_total = total;
         }
         public void ButtonPressed()
         {
             // You can add only one line here
-            _total.purchaseCan(_can);
+            //_total.purchaseCan(_can);
+            _can.PurchaseCan();
             
         }
     }
