@@ -18,6 +18,13 @@ namespace VendingMachine
         private CoinDispenser _coinDispenser;
         private VMControl _total;
 
+        /// <summary>
+        /// Coin constructor connecting coin dispensers with controller class
+        /// </summary>
+        /// <param name="coinValue"></param>
+        /// <param name="initNum"></param>
+        /// <param name="coinDispenser"></param>
+        /// <param name="total"></param>
         public Coin(int coinValue, int initNum, CoinDispenser coinDispenser, VMControl total)
         {
             _coinValue = coinValue;
@@ -26,22 +33,7 @@ namespace VendingMachine
             _total = total;
         }
 
-        public void addCoin()
-        {
-            _numCoin++;
-            _total.UpdateCredit(this);
-        }
-
-        public void removeCoin()
-        {
-            _numCoin--;
-        }
-
-        public void resetCoin()
-        {
-            _numCoin = _initCoins;
-        }
-
+        // Properties to grab the number of coins and the value of the coin
         public int numCoin
         {
             get
@@ -49,7 +41,6 @@ namespace VendingMachine
                 return _numCoin;
             }
         }
-
         public int coinValue
         {
             get
@@ -58,8 +49,29 @@ namespace VendingMachine
             }
         }
 
+        // Method to simulate when coin is being added
+        public void addCoin()
+        {
+            _numCoin++;
+            _total.UpdateCredit(this);
+        }
+
+        // Method to remove a single coin from the inventory
+        public void removeCoin(int numcoin)
+        {
+            _numCoin -= numcoin;
+        }
+
+        // Method to reset coin inventory
+        public void resetCoin()
+        {
+            _numCoin = _initCoins;
+        }
+        
+        // Method to dispense coins
         public void dispenseCoin(int numcoin)
         {
+            removeCoin(numcoin);
             _coinDispenser.Actuate(numcoin);
         }
     }

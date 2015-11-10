@@ -58,7 +58,6 @@ namespace VendingMachine
         /// <param name="coin"></param>
         public void UpdateCredit(Coin coin)
         {
-            //coin.addCoin();
             credit += coin.coinValue;
             UpdateDisplay();
         }
@@ -109,6 +108,25 @@ namespace VendingMachine
                 return true;
             }
         }
+        /// <summary>
+        /// Method to return correct change in coins
+        /// </summary>
+        public void returnCoins()
+        {
+            int start = _Coins.Length - 1;
+            for (int i = start; i >= 0; i--)
+            {
+                int value = _Coins[i].coinValue;
+                int count = 0;
+                while (value <= credit && _Coins[i].numCoin > 0)
+                {
+                    credit -= _Coins[i].coinValue;
+                    count++;
+                }
+                _Coins[i].dispenseCoin(count);
+            }
+            UpdateDisplay();
+        }
 
         /// <summary>
         /// Method to actuate can purchase
@@ -122,29 +140,7 @@ namespace VendingMachine
                 can.DispenseCan();
                 returnCoins();
                 UpdateDisplay();
-                //int i = Array.IndexOf(_Cans, can);
             }
-        }
-
-        /// <summary>
-        /// Method to return correct change in coins
-        /// </summary>
-        public void returnCoins()
-        {
-            int start = _Coins.Length - 1;
-            for (int i = start; i >= 0; i--)
-            {
-                int value = _Coins[i].coinValue;
-                int count = 0;
-                while(value <= credit && _Coins[i].numCoin > 0)
-                {
-                    credit -= _Coins[i].coinValue;
-                    _Coins[i].removeCoin();
-                    count++;
-                }
-                _Coins[i].dispenseCoin(count);
-            }
-            UpdateDisplay();
         }
 
         /// <summary>
