@@ -29,6 +29,7 @@ namespace VendingMachine
         {
             _coinValue = coinValue;
             _numCoin += initNum;
+            _initCoins = initNum;
             _coinDispenser = coinDispenser;
             _total = total;
         }

@@ -88,6 +88,7 @@ namespace VendingMachine
         public Boolean CanReturnCoins(int purchasePrice = 0)
         {
             int start = _Coins.Length - 1;
+
             int testCredit = credit - purchasePrice;
             for (int i = start; i >= 0; i--)
             {
@@ -118,7 +119,7 @@ namespace VendingMachine
             {
                 int value = _Coins[i].coinValue;
                 int count = 0;
-                while (value <= credit && _Coins[i].numCoin > 0)
+                while (value <= credit && _Coins[i].numCoin > count)
                 {
                     credit -= _Coins[i].coinValue;
                     count++;
